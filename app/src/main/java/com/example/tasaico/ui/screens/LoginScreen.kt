@@ -37,7 +37,8 @@ fun LoginScreen(onLogin: () -> Unit) {
             .fillMaxSize()
             .verticalScroll(
                 state = rememberScrollState(),
-                reverseScrolling = true
+                enabled = true,
+                reverseScrolling = false
             ),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center

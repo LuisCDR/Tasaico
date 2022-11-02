@@ -24,18 +24,25 @@ fun DetailScreen(navController: NavController, name: String?) {
                 inclusive = false
             )
         }) {
-            IconWith(Icons.Default.ArrowBack)
+            IconWith(imageVector = Icons.Default.ArrowBack)
         }
         Space(height = 20)
-        IconWith(Icons.Default.Person)
+        IconWith(
+            modifier = Modifier.size(30.dp),
+            imageVector = Icons.Default.Person
+        )
         Space(height = 10)
-        name?.let { Text(text = it.uppercase()) }
+        Text(text =  name!!.uppercase())
     }
 }
 
 @Composable
-fun IconWith(imageVector: ImageVector) {
+fun IconWith(
+    modifier: Modifier = Modifier,
+    imageVector: ImageVector
+) {
     Row(
+        modifier = modifier,
         horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically
     ) {

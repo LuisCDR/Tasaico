@@ -31,14 +31,16 @@ fun HomeScreen(navController: NavController) {
     AppScaffold(title = "CLIENTES") {
         Row(
             modifier = Modifier.padding(10.dp),
-            horizontalArrangement = Arrangement.SpaceBetween
+            horizontalArrangement = Arrangement.Start,
+            verticalAlignment = Alignment.CenterVertically
         ) {
             OutlinedTextField(
                 value = valueCustomer,
                 onValueChange = { valueCustomer = it },
                 shape = RoundedCornerShape(20.dp),
                 modifier = Modifier
-                    .size(300.dp, 60.dp),
+                    .fillMaxWidth(0.75f)
+                    .height(60.dp),
                 trailingIcon = {
                     Icon(imageVector = Icons.Default.Search, contentDescription = null)
                 }
@@ -51,16 +53,15 @@ fun HomeScreen(navController: NavController) {
                     navController.navigate("products/$valueCustomer")
                 }
                           },
-                modifier = Modifier.size(50.dp, 40.dp),
+                modifier = Modifier
+                    .height(40.dp),
                 shape = RoundedCornerShape(10.dp)
             ) {
                 Text(text = "Continuar")
             }
         }
-        LazyColumn {
-            items(items = customers) { item ->
-                Customer(name = item, navController)
-            }
+        ColumnItems(data = customers) {
+            Customer(name = it, navController)
         }
     }
 }
@@ -75,6 +76,17 @@ val customers = listOf(
     "Juan",
     "María"
 )
+
+@Composable
+fun ColumnItems(
+    data: List<String>,
+    content: @Composable (String) -> Unit) {
+    LazyColumn {
+        items(items = data) { item ->
+            content(item)
+        }
+    }
+}
 
 @Composable
 fun Customer(name: String, navController: NavController) {

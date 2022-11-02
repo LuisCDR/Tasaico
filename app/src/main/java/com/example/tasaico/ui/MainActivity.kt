@@ -16,7 +16,7 @@ import androidx.navigation.navArgument
 import com.example.tasaico.ui.screens.DetailScreen
 import com.example.tasaico.ui.screens.HomeScreen
 import com.example.tasaico.ui.screens.LoginScreen
-import com.example.tasaico.ui.screens.Products
+import com.example.tasaico.ui.screens.ProductScreen
 import com.example.tasaico.ui.theme.TasaicoTheme
 
 class MainActivity : ComponentActivity() {
@@ -60,7 +60,13 @@ fun AppNavigation(startDestination: String) {
             route = "products/{name}",
             arguments = listOf(navArgument("name") { type = NavType.StringType })
         ) { backStackEntry ->
-            Products(navController, backStackEntry.arguments?.getString("name"))
+            ProductScreen(navController, backStackEntry.arguments?.getString("name"))
+        }
+        composable(
+            route = "products/{name}/details",
+            arguments = listOf(navArgument("name") { type = NavType.StringType })
+        ) { backStackEntry ->
+            DetailScreen(navController, backStackEntry.arguments?.getString("name"))
         }
     }
 }
